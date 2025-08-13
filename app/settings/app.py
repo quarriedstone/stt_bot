@@ -10,4 +10,7 @@ class AppSettings(BaseSettings):
     users: list[int]
     token: str
 
+    chunk_size: int = 4096
+    model_path: str = "openai/whisper-medium"
+
     model_config = SettingsConfigDict(env_prefix="bot_")

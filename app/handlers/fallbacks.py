@@ -7,8 +7,12 @@ from app.res import messages, keyboards
 
 async def fallback(update, context):
     logger.info("fallback")
-    await update.message.reply_text(messages.FALLBACK, reply_markup=ReplyKeyboardMarkup(
-        keyboards.START, one_time_keyboard=True,
-    ))
+    await update.message.reply_text(
+        messages.FALLBACK,
+        reply_markup=ReplyKeyboardMarkup(
+            keyboards.START,
+            one_time_keyboard=True,
+        ),
+    )
 
     return ConversationHandler.END

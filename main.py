@@ -1,15 +1,26 @@
+import transformers
 from telegram import Update
-from telegram.ext import Application, CommandHandler, ConversationHandler, MessageHandler, filters
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    ConversationHandler,
+    MessageHandler,
+    filters,
+)
 
+from app.container import APP_CONTAINER
 from app.handlers.audio_handler import handle_audio
 from app.handlers.fallbacks import fallback
 from app.handlers.start import start
 from app.res.states import States
 from app.settings.app import AppSettings
 
+transformers.logging.set_verbosity_info()
+
 
 def main():
-    settings = AppSettings()
+    settings = APP_CONTAINER.app_settings()
+    APP_CONTAINER.stt_adapter()
 
     application = Application.builder().token(settings.token).build()
 
@@ -17,9 +28,11 @@ def main():
         entry_points=[CommandHandler("start", start)],
         states={
             States.AUTH: [MessageHandler(filters.TEXT, start)],
-            States.SEND_AUDIO: [MessageHandler(filters.AUDIO | filters.VOICE, handle_audio)]
+            States.SEND_AUDIO: [
+                MessageHandler(filters.AUDIO | filters.VOICE, handle_audio)
+            ],
         },
-        fallbacks=[MessageHandler(filters.ALL, fallback)]
+        fallbacks=[MessageHandler(filters.ALL, fallback)],
     )
 
     application.add_handler(conv_handler)

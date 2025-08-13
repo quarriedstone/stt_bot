@@ -6,7 +6,7 @@ authors = [
     {name = "quarriedstone",email = "quarriedstone@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.10,<3.14"
 
 
 [build-system]
@@ -17,3 +17,42 @@ build-backend = "poetry.core.masonry.api"
 python-telegram-bot = "^22.3"
 pydantic = "^2.11.7"
 pydantic-settings = "^2.10.1"
+transformers = "^4.55.1"
+ruff = "^0.12.8"
+black = "^25.1.0"
+dependency-injector = "^4.48.1"
+torch = "^2.8.0"
+torchaudio = "^2.8.0"
+ffmpeg = "^1.4"
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "notebooks"
+]
