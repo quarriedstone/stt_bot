@@ -13,7 +13,6 @@ from app.handlers.audio_handler import handle_audio
 from app.handlers.fallbacks import fallback
 from app.handlers.start import start
 from app.res.states import States
-from app.settings.app import AppSettings
 
 transformers.logging.set_verbosity_info()
 
@@ -25,7 +24,10 @@ def main():
     application = Application.builder().token(settings.token).build()
 
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler("start", start)],
+        entry_points=[
+            CommandHandler("start", start),
+            MessageHandler(filters.TEXT, start),
+        ],
         states={
             States.AUTH: [MessageHandler(filters.TEXT, start)],
             States.SEND_AUDIO: [

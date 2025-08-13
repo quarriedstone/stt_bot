@@ -24,6 +24,7 @@ dependency-injector = "^4.48.1"
 torch = "^2.8.0"
 torchaudio = "^2.8.0"
 ffmpeg = "^1.4"
+pydub = "^0.25.1"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
