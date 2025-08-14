@@ -23,6 +23,8 @@ black = "^25.1.0"
 dependency-injector = "^4.48.1"
 ffmpeg = "^1.4"
 pydub = "^0.25.1"
+torch = {version = "^2.8.0", source = "pytorch-cpu-src"}
+torchaudio = {version = "^2.8.0", source = "pytorch-cpu-src"}
 
 [[tool.poetry.source]]
 name = "pytorch-cpu-src"
