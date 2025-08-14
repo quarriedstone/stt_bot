@@ -7,7 +7,7 @@ ENV POETRY_HOME="/opt/poetry" \
     PYTHONDONTWRITEBYTECODE=1
 
 ENV PATH="$POETRY_HOME/bin:$PATH"
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl ffmpeg
 RUN curl -sSL https://install.python-poetry.org | python -
 
 WORKDIR /app
