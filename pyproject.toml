@@ -21,10 +21,13 @@ transformers = "^4.55.1"
 ruff = "^0.12.8"
 black = "^25.1.0"
 dependency-injector = "^4.48.1"
-torch = "^2.8.0"
-torchaudio = "^2.8.0"
 ffmpeg = "^1.4"
 pydub = "^0.25.1"
+
+[[tool.poetry.source]]
+name = "pytorch-cpu-src"
+url = "https://download.pytorch.org/whl/cpu/"
+priority = "explicit"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
