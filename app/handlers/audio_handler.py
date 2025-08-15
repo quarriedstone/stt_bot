@@ -20,6 +20,7 @@ async def transform_audio(update, file: "File", mime_type: str):
     audio_adapter = APP_CONTAINER.audio_adapter()
 
     supported_mime_types = [MimeTypes.mp3, MimeTypes.wav, MimeTypes.ogg]
+    supported_mime_types_str = ", ".join([*supported_mime_types, MimeTypes.m4a])
 
     in_memory_file = io.BytesIO()
     await file.download_to_memory(in_memory_file)
@@ -32,7 +33,7 @@ async def transform_audio(update, file: "File", mime_type: str):
     elif mime_type not in supported_mime_types:
         logger.debug(f"Unsupported file type: {mime_type}")
         await update.message.reply_text(
-            messages.UNSUPPORTED_FILE.format([*supported_mime_types, MimeTypes.m4a])
+            messages.UNSUPPORTED_FILE.format(supported_mime_types_str)
         )
         return ConversationHandler.END
 
@@ -43,7 +44,7 @@ async def transform_audio(update, file: "File", mime_type: str):
     except ValueError as e:
         logger.exception("Cannot parse audio.", exc_info=e)
         await update.message.reply_text(
-            messages.UNSUPPORTED_FILE.format([*supported_mime_types, MimeTypes.m4a]),
+            messages.UNSUPPORTED_FILE.format(supported_mime_types_str),
         )
     else:
         text_chunks = textwrap.wrap(text, app_settings.chunk_size)
