@@ -6,7 +6,7 @@ from pydub import AudioSegment
 class AudioConverterAdapter:
     """Конвертер для звуков."""
 
-    def convert_m4a_to_mp3_in_memory(self, m4a_data: io.BytesIO) -> io.BytesIO:
+    async def convert_m4a_to_mp3_in_memory(self, m4a_data: io.BytesIO) -> io.BytesIO:
         """
         Converts M4A audio data (bytes) to MP3 audio data (bytes) in memory.
 

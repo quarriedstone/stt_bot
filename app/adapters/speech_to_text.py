@@ -18,7 +18,7 @@ class SttAdapter:
             chunk_length_s=self._chunk_length,
         )
 
-    def stt_to_text(
+    async def stt_to_text(
         self,
         audio: BytesIO,
     ):

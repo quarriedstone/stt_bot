@@ -6,6 +6,7 @@ from telegram.ext import (
     ConversationHandler,
     MessageHandler,
     filters,
+    Defaults,
 )
 
 from app.container import APP_CONTAINER
@@ -20,12 +21,12 @@ transformers.logging.set_verbosity_info()
 def main():
     settings = APP_CONTAINER.app_settings()
     APP_CONTAINER.stt_adapter()
+    defaults = Defaults(block=False)
 
-    application = Application.builder().token(settings.token).build()
+    application = Application.builder().token(settings.token).defaults(defaults).build()
 
     conv_handler = ConversationHandler(
         entry_points=[
-            CommandHandler("start", start),
             MessageHandler(filters.TEXT, start),
         ],
         states={
@@ -34,7 +35,10 @@ def main():
                 MessageHandler(filters.AUDIO | filters.VOICE, handle_audio)
             ],
         },
-        fallbacks=[MessageHandler(filters.ALL, fallback)],
+        fallbacks=[
+            CommandHandler("start", start),
+            MessageHandler(filters.ALL, fallback),
+        ],
     )
 
     application.add_handler(conv_handler)
